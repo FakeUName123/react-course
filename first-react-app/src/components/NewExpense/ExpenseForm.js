@@ -2,9 +2,6 @@ import "./ExpenseForm.css";
 import { useState } from "react";
 
 const ExpenseForm = (props) => {
-  // const [currTitle, setTitleState] = useState("");
-  // const [currAmount, setAmountState] = useState("");
-  // const [currDate, setDateState] = useState("");
 
   const [userInput, setUserInput] = useState({
     currTitle: '',
@@ -16,22 +13,26 @@ const ExpenseForm = (props) => {
     setUserInput((prevState) => {
       return {
         ...prevState,
-        currTitle: event.target.value,
+        currTitle: event.target.value
       };
     });
   };
 
   const amountChange = (event) => {
-    setUserInput({
-      ...userInput,
-      currAmount: event.target.value,
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        currAmount: event.target.value
+      }
     });
   };
 
   const dateChange = (event) => {
-    setUserInput({
-      ...userInput,
-      currDate: event.target.value,
+    setUserInput( (prevState) => {
+      return {
+        ...prevState,
+        currDate: event.target.value
+      }
     });
   };
 
@@ -43,7 +44,7 @@ const ExpenseForm = (props) => {
       date: new Date(userInput.currDate)
     };
 
-    props.onSaveExpenseData(userInput);
+    props.onSaveExpenseData(expenseData);
     setUserInput({
       currTitle: '',
       currAmount: '',

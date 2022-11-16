@@ -2,27 +2,28 @@ import ExpenseItem from "../Expenses/ExpenseItem";
 import "../Expenses/ExpenseParent.css";
 import { useState } from "react";
 import ExpensesFilter from "../ExpensesFilter/ExpensesFilter";
+import Card from "../UI/Card";
 
 function ExpenseParent(props) {
-  const data = props.data;
-  const [currState, setState] = useState("");
+  const [currState, setState] = useState("2020");
   const onChangeHandler = (selectedOption) => {
     setState(selectedOption);
-    console.log(selectedOption);
   };
 
   return (
-    <div className="expenses">
-      <ExpensesFilter onDrpDwnChange={onChangeHandler} />
-      {data.map((element) => {
-        return (
-          <ExpenseItem
-            title={element.title}
-            amount={element.amount}
-            date={element.date}
-          />
-        );
-      })}
+    <div>
+      <Card className="expenses">
+        <ExpensesFilter selected={currState} onDrpDwnChange={onChangeHandler} />
+        {props.data.map((element) => {
+          return (
+            <ExpenseItem
+              title={element.title}
+              amount={element.amount}
+              date={element.date}
+            />
+          );
+        })}
+      </Card>
     </div>
   );
 }
