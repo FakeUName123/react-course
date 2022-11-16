@@ -17,6 +17,7 @@ function ExpenseParent(props) {
         {props.data.map((element) => {
           return (
             <ExpenseItem
+              key={element.id}
               title={element.title}
               amount={element.amount}
               date={element.date}
