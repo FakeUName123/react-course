@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import ExpenseParent from "./components/Expenses/ExpenseParent";
 import Card from './components/UI/Card';
+import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
   const expenses = [
@@ -26,9 +27,14 @@ function App() {
     },
   ];
 
+  const addExpenseHandler = (expense) => {
+    console.log('in App.js');
+    console.log(expense);
+  }
+
   return (
     <Card>
-      <h2>Let's get Started!</h2>
+      <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
       <ExpenseParent data={expenses}/>
     </Card>
   );
