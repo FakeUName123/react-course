@@ -1,19 +1,20 @@
 import "./ExpenseForm.css";
 import { useState } from "react";
 
-const ExpenseForm = (props) => {
+const emptyFormObj = {
+  currTitle: "",
+  currAmount: "",
+  currDate: "",
+};
 
-  const [userInput, setUserInput] = useState({
-    currTitle: '',
-    currAmount: '',
-    currDate: '',
-  });
+const ExpenseForm = (props) => {
+  const [userInput, setUserInput] = useState(emptyFormObj);
 
   const titleChange = (event) => {
     setUserInput((prevState) => {
       return {
         ...prevState,
-        currTitle: event.target.value
+        currTitle: event.target.value,
       };
     });
   };
@@ -22,34 +23,35 @@ const ExpenseForm = (props) => {
     setUserInput((prevState) => {
       return {
         ...prevState,
-        currAmount: event.target.value
-      }
+        currAmount: event.target.value,
+      };
     });
   };
 
   const dateChange = (event) => {
-    setUserInput( (prevState) => {
+    setUserInput((prevState) => {
       return {
         ...prevState,
-        currDate: event.target.value
-      }
+        currDate: event.target.value,
+      };
     });
+  };
+
+  const cancelHandler = () => {
+    setUserInput(emptyFormObj);
+    props.onCancelClick();
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
     const expenseData = {
       title: userInput.currTitle,
-      amount: userInput.currAmount,
-      date: new Date(userInput.currDate)
+      amount: +userInput.currAmount,
+      date: new Date(userInput.currDate),
     };
 
     props.onSaveExpenseData(expenseData);
-    setUserInput({
-      currTitle: '',
-      currAmount: '',
-      currDate: ''
-    })
+    setUserInput(emptyFormObj);
   };
 
   return (
@@ -85,9 +87,10 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button type="submit">
-          Add Expense
+        <button type="button" onClick={cancelHandler}>
+          Cancel
         </button>
+        <button type="submit">Add Expense</button>
       </div>
     </form>
   );

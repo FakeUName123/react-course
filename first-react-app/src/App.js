@@ -36,7 +36,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="App">
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
       <ExpenseParent data={expenses} />
     </div>
